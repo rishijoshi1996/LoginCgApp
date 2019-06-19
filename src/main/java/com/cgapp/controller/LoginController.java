@@ -29,7 +29,7 @@ public class LoginController {
 		return "Data Added";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping("/getlogin")
 	public List<Login> getLogin(){
 		return repo.findAll();
 	}

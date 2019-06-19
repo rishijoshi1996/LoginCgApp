@@ -51,6 +51,10 @@ public class Employees {
 	
 	@OneToMany(mappedBy = "manager")
 	private Set<Employees> subordinates = new HashSet<Employees>();
+	
+	@ManyToOne
+	@JoinColumn
+	private Nomination nomination;
 
 	public Employees() {
 	}
