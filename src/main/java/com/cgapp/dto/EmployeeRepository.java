@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cgapp.entity.Employees;
 
-@Repository
+@Repository("emprepo")
 public interface EmployeeRepository extends JpaRepository<Employees, Integer> {
 
 }

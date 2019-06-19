@@ -3,8 +3,6 @@ package com.cgapp.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -45,9 +43,7 @@ public class TrainingCatalog {
 	@Column(name = "training_links")
 	private String trainingLinks;
 	
-	@ManyToOne
-	@JoinColumn
-	private Nomination nomination;
+	
 
 	public TrainingCatalog() {
 	}

@@ -44,17 +44,12 @@ public class Employees {
 	@Column(name = "emp_department")
 	private String empdept;
 
-	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id")
 	private Employees manager;
-	
+
 	@OneToMany(mappedBy = "manager")
 	private Set<Employees> subordinates = new HashSet<Employees>();
-	
-	@ManyToOne
-	@JoinColumn
-	private Nomination nomination;
 
 	public Employees() {
 	}
@@ -138,8 +133,5 @@ public class Employees {
 	public void setManager(Employees manager) {
 		this.manager = manager;
 	}
-
-	
-	
 
 }

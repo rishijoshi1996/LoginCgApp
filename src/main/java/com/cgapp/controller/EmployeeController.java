@@ -9,30 +9,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgapp.dto.EmployeeRepository;
 import com.cgapp.entity.Employees;
+import com.cgapp.service.EmployeeService;
 
 @RestController
 public class EmployeeController {
 
 	@Autowired
-	private EmployeeRepository empRepo;
+	private EmployeeService empservice;
 
 	@RequestMapping("/testemp")
 	public String testEmp() {
 		return "test emp";
 	}
-	
+
 	@PostMapping("/createemp")
 	public String creatEmployee(@RequestBody Employees employee) {
-		Employees manager = empRepo.findOne(101);
-		employee.setManager(manager);
-		empRepo.save(employee);
+		empservice.createEmployees(employee);
 		return "Employee Added";
 	}
-	
+
 	@GetMapping("/getemployee")
 	public List<Employees> getEmployee() {
-       return empRepo.findAll();
+		return empservice.getEmployees();
 	}
 }
