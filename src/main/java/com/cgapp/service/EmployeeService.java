@@ -30,4 +30,9 @@ public class EmployeeService {
 		return emprepo.findAll();
 	}
 	
+	public Employees findEmp(int id) {
+		return emprepo.findOne(id);
+		
+	}
+	
 }

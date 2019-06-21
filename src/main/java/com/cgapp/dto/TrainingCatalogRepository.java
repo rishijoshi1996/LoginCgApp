@@ -8,4 +8,5 @@ import com.cgapp.entity.TrainingCatalog;
 @Repository
 public interface TrainingCatalogRepository extends JpaRepository<TrainingCatalog, Integer> {
 
+	
 }

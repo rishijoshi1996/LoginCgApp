@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  * 
  * @author risjoshi
@@ -48,7 +49,7 @@ public class Employees {
 	@Column(name = "emp_department")
 	private String empdept;
 
-	//Relation Mapping
+	// Relation Mapping
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id")
 	private Employees manager;
@@ -59,7 +60,10 @@ public class Employees {
 	public Employees() {
 	}
 
-	//Getters And Setters
+	public Employees(String empName) {
+	}
+
+	// Getters And Setters
 	public int getEmpId() {
 		return empId;
 	}

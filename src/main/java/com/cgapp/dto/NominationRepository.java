@@ -8,4 +8,5 @@ import com.cgapp.entity.Nomination;
 @Repository
 public interface NominationRepository extends JpaRepository<Nomination, Integer> {
 
+	
 }
