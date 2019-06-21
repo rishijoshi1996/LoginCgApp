@@ -26,6 +26,8 @@ public class NominationController {
 	@PostMapping("/createnominee")
 	public String createNominee(@RequestBody Nomination nomination) {
 
+		String timestamp = nominationservice.timestamp();
+		nomination.setEmpTimestamp(timestamp);
 		nominationservice.createNomination(nomination);
 
 		return "nomination added";

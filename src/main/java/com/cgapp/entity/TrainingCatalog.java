@@ -5,49 +5,53 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author risjoshi
+ *
+ */
 @Entity
 @Table(name = "training_catalog")
 public class TrainingCatalog {
-	
+
 	@Id
 	@Column(name = "training_id")
 	private int trainingId;
 
 	@Column(name = "training_name")
 	private String trainingName;
-	
+
 	@Column(name = "training_audience")
 	private String trainingAudience;
-	
+
 	@Column(name = "training_duration")
 	private String trainingDuration;
-	
+
 	@Column(name = "training_location")
 	private String trainingLocation;
-	
+
 	@Column(name = "training_type")
 	private String trainingType;
-	
+
 	@Column(name = "training_start_date")
 	private String trainingStartDate;
-	
+
 	@Column(name = "training_end_date")
 	private String trainingEndDate;
-	
+
 	@Column(name = "training_start_time")
 	private String trainingStartTime;
-	
+
 	@Column(name = "training_end_time")
 	private String trainingEndTime;
-	
+
 	@Column(name = "training_links")
 	private String trainingLinks;
-	
-	
 
 	public TrainingCatalog() {
 	}
 
+	// Relation mapping
 	public int getTrainingId() {
 		return trainingId;
 	}
@@ -96,8 +100,6 @@ public class TrainingCatalog {
 		this.trainingType = trainingType;
 	}
 
-	
-
 	public String getTrainingStartDate() {
 		return trainingStartDate;
 	}
@@ -137,6 +139,5 @@ public class TrainingCatalog {
 	public void setTrainingLinks(String trainingLinks) {
 		this.trainingLinks = trainingLinks;
 	}
-	
-	
+
 }

@@ -1,5 +1,7 @@
 package com.cgapp.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +17,35 @@ import com.cgapp.entity.TrainingCatalog;
 @Service
 public class NominationService {
 
-	
 	@Autowired
 	private NominationRepository nominationrepo;
-	
+
 	@Autowired
 	private EmployeeRepository emprepo;
-	
+
 	@Autowired
 	private TrainingCatalogRepository trainingrepo;
-	
+
+	//create Nomination
 	public Nomination createNomination(Nomination nomination) {
-		Employees emp = emprepo.findOne(102);
+		Employees emp = emprepo.findOne(103);
 		nomination.setEmployees(emp);
 		TrainingCatalog catalog = trainingrepo.findOne(501);
 		nomination.setTrainingcatalog(catalog);
 		return nominationrepo.save(nomination);
 	}
-	
-	public List<Nomination> getNomination(){
+
+	//Get all Nomination details
+	public List<Nomination> getNomination() {
 		return nominationrepo.findAll();
+	}
+
+	// Timestamp Locale Date
+	public String timestamp() {
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		return dtf.format(now);
+
 	}
 }

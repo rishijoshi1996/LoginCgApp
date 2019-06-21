@@ -14,10 +14,12 @@ public class TrainingCatalogService {
 	@Autowired
 	private TrainingCatalogRepository trainingrepo;
 	
+	//Create Training Catalog
 	public TrainingCatalog createTrainingCatalog(TrainingCatalog trainingcatalog) {
 		return trainingrepo.save(trainingcatalog);
 	}
 	
+	//fetch all traing catalog details
 	public List<TrainingCatalog> getTraining(){
 		return trainingrepo.findAll();
 	}

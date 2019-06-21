@@ -7,6 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author risjoshi
+ *
+ */
 @Entity
 @Table(name = "nomination")
 public class Nomination {
@@ -14,31 +18,29 @@ public class Nomination {
 	@Id
 	@Column(name = "nomination_id")
 	private int nominationId;
-	
+
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "device_id")
 	private String deviceId;
-	
-	@Column (name = "emp_timestamp")
+
+	@Column(name = "emp_timestamp")
 	private String empTimestamp;
-	
+
 	@Column(name = "mgr_timestamp")
 	private String mgrTimestamp;
-	
+
+	// Relation Mapping
 	@ManyToOne
-    @JoinColumn(name="employee_id")
-    private Employees employees;
-	
+	@JoinColumn(name = "employee_id")
+	private Employees employees;
+
 	@ManyToOne
-	@JoinColumn(name="training_id")
+	@JoinColumn(name = "training_id")
 	private TrainingCatalog trainingcatalog;
-	
-	
 
-	
-
+	//Getters and setters
 	public TrainingCatalog getTrainingcatalog() {
 		return trainingcatalog;
 	}
@@ -98,12 +100,4 @@ public class Nomination {
 		this.mgrTimestamp = mgrTimestamp;
 	}
 
-	
-
-
-
-
-
-	
-	
 }

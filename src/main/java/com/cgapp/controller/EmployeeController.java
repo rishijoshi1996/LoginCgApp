@@ -18,11 +18,17 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService empservice;
 
+	
 	@RequestMapping("/testemp")
 	public String testEmp() {
 		return "test emp";
 	}
 
+	/**
+	 * 
+	 * @param employee
+	 * @return
+	 */
 	@PostMapping("/createemp")
 	public String creatEmployee(@RequestBody Employees employee) {
 		empservice.createEmployees(employee);
