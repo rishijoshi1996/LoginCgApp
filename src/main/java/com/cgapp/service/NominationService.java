@@ -28,7 +28,7 @@ public class NominationService {
 
 	//create Nomination
 	public Nomination createNomination(Nomination nomination) {
-		Employees emp = emprepo.findOne(103);
+		Employees emp = emprepo.findOne(102);
 		nomination.setEmployees(emp);
 		TrainingCatalog catalog = trainingrepo.findOne(501);
 		nomination.setTrainingcatalog(catalog);

@@ -13,6 +13,7 @@ import com.cgapp.dto.LoginRepository;
 import com.cgapp.entity.Login;
 
 @RestController
+@RequestMapping("/cgapp")
 public class LoginController {
 
 	@Autowired
@@ -23,14 +24,23 @@ public class LoginController {
 		return "test";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/login")
 	public String createlogin(@RequestBody Login login) {
 		repo.save(login);
 		return "Data Added";
 	}
-	
+
 	@GetMapping("/getlogin")
-	public List<Login> getLogin(){
+	public List<Login> getLogin() {
 		return repo.findAll();
+	}
+
+	@GetMapping("/login")
+	public String checkLogin(Login login) {
+		if (login.getUsername().equals("rishi") && login.getPassword().equals("1234")) {
+			return "Login success";
+		} else {
+			return "Login Fail";
+		}
 	}
 }

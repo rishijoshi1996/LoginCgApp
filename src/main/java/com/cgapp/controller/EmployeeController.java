@@ -14,6 +14,7 @@ import com.cgapp.entity.Employees;
 import com.cgapp.service.EmployeeService;
 
 @RestController
+@RequestMapping("/cgapp")
 public class EmployeeController {
 
 	@Autowired
@@ -29,19 +30,19 @@ public class EmployeeController {
 	 * @param employee
 	 * @return
 	 */
-	@PostMapping("/createemp")
+	@PostMapping("/employee")
 	public String creatEmployee(@RequestBody Employees employee) {
 		empservice.createEmployees(employee);
 		return "Employee Added";
 	}
 
-	@GetMapping("/getemployee")
+	@GetMapping("/employees")
 	public List<Employees> getEmployee() {
 
 		return empservice.getEmployees();
 	}
 	
-	@GetMapping("/findemp/{id}")
+	@GetMapping("/employee/{id}")
 	public Employees findEmp(@PathVariable int id) {
 		return empservice.findEmp(id);
 	}

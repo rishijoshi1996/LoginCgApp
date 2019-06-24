@@ -13,6 +13,7 @@ import com.cgapp.entity.Nomination;
 import com.cgapp.service.NominationService;
 
 @RestController
+@RequestMapping("/cgapp")
 public class NominationController {
 
 	@Autowired
@@ -23,7 +24,7 @@ public class NominationController {
 		return "Success";
 	}
 
-	@PostMapping("/createnominee")
+	@PostMapping("/nomination")
 	public String createNominee(@RequestBody Nomination nomination) {
 
 		String timestamp = nominationservice.timestamp();
@@ -33,7 +34,7 @@ public class NominationController {
 		return "nomination added";
 	}
 
-	@GetMapping("/getnomination")
+	@GetMapping("/nominations")
 	public List<Nomination> getNomination() {
 		return nominationservice.getNomination();
 	}

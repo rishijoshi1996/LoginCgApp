@@ -13,6 +13,7 @@ import com.cgapp.entity.TrainingCatalog;
 import com.cgapp.service.TrainingCatalogService;
 
 @RestController
+@RequestMapping("/cgapp")
 public class TrainingCatalogController {
 
 	@Autowired
@@ -23,14 +24,14 @@ public class TrainingCatalogController {
 		return "Test";
 	}
 	
-	@PostMapping("/createtraining")
+	@PostMapping("/training")
 	public String createTraining(@RequestBody TrainingCatalog trainingcatalog) {
 		 trainingservice.createTrainingCatalog(trainingcatalog);
 		
 		return "Training Added";
 	}
 	
-	@GetMapping("/gettraining")
+	@GetMapping("/trainings")
 	public List<TrainingCatalog> getTraining(){
 		
 		return trainingservice.getTraining();

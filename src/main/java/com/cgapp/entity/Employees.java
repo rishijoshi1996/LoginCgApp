@@ -144,4 +144,21 @@ public class Employees {
 		this.manager = manager;
 	}
 
+	public Employees(Integer empId, String empName, String userName, String empEmail, String empContact,
+			String jobTitle, String empPosition, String empLocation, String empdept) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.userName = userName;
+		this.empEmail = empEmail;
+		this.empContact = empContact;
+		this.jobTitle = jobTitle;
+		this.empPosition = empPosition;
+		this.empLocation = empLocation;
+		this.empdept = empdept;
+	}
+	
+	//Constructor for test cases
+	
+
 }
