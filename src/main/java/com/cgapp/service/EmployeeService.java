@@ -22,8 +22,8 @@ public class EmployeeService {
 
 	// Create new Employee
 	public Employees createEmployees(Employees employee) {
-		Employees manager = emprepo.findOne(101);
-		employee.setManager(manager);
+//		Employees manager = emprepo.findOne(101);
+//		employee.setManager(manager);
 		return emprepo.save(employee);
 
 	}

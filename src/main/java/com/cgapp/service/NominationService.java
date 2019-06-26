@@ -54,6 +54,7 @@ public class NominationService {
 		
 		Nomination nomination = nominationrepo.findOne(nomId);
 		nomination.setStatus(status);
+		nomination.setMgrTimestamp(timestamp());
 		nominationrepo.save(nomination);
 		return "Status Updated to "+status;
 		
