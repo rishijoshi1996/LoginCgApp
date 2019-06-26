@@ -34,16 +34,8 @@ public class EmployeeService {
 	}
 
 	public Employees findEmp(int id) {
-		try {
-			return emprepo.findOne(id);
-		} catch (EmployeeNotFoundException e) {
+		return emprepo.findOne(id);
 
-			throw new EmployeeNotFoundException(id);
-		}
-	}
-	
-	public List<Employees> getManager(){
-		return emprepo.getEmployeesQuery();
 	}
 
 }

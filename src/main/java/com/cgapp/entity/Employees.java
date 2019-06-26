@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author risjoshi
@@ -29,7 +31,10 @@ public class Employees {
 	private String empName;
 
 	@Column(name = "emp_username")
-	private String userName;
+	private String empUserName;
+
+	@Column(name = "emp_password")
+	private String empPassword;
 
 	@Column(name = "emp_email")
 	private String empEmail;
@@ -38,7 +43,7 @@ public class Employees {
 	private String empContact;
 
 	@Column(name = "emp_job_title")
-	private String jobTitle;
+	private String empJobTitle;
 
 	@Column(name = "emp_position")
 	private String empPosition;
@@ -47,28 +52,25 @@ public class Employees {
 	private String empLocation;
 
 	@Column(name = "emp_department")
-	private String empdept;
+	private String empDepartment;
 
 	// Relation Mapping
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id")
 	private Employees manager;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "manager")
 	private Set<Employees> subordinates = new HashSet<Employees>();
 
 	public Employees() {
 	}
 
-	public Employees(String empName) {
-	}
-
-	// Getters And Setters
-	public int getEmpId() {
+	public Integer getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(int empId) {
+	public void setEmpId(Integer empId) {
 		this.empId = empId;
 	}
 
@@ -80,12 +82,20 @@ public class Employees {
 		this.empName = empName;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getEmpUserName() {
+		return empUserName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmpUserName(String empUserName) {
+		this.empUserName = empUserName;
+	}
+
+	public String getEmpPassword() {
+		return empPassword;
+	}
+
+	public void setEmpPassword(String empPassword) {
+		this.empPassword = empPassword;
 	}
 
 	public String getEmpEmail() {
@@ -104,12 +114,12 @@ public class Employees {
 		this.empContact = empContact;
 	}
 
-	public String getJobTitle() {
-		return jobTitle;
+	public String getEmpJobTitle() {
+		return empJobTitle;
 	}
 
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
+	public void setEmpJobTitle(String empJobTitle) {
+		this.empJobTitle = empJobTitle;
 	}
 
 	public String getEmpPosition() {
@@ -128,12 +138,12 @@ public class Employees {
 		this.empLocation = empLocation;
 	}
 
-	public String getEmpdept() {
-		return empdept;
+	public String getEmpDepartment() {
+		return empDepartment;
 	}
 
-	public void setEmpdept(String empdept) {
-		this.empdept = empdept;
+	public void setEmpDepartment(String empDepartment) {
+		this.empDepartment = empDepartment;
 	}
 
 	public Employees getManager() {
@@ -144,21 +154,17 @@ public class Employees {
 		this.manager = manager;
 	}
 
-	public Employees(Integer empId, String empName, String userName, String empEmail, String empContact,
-			String jobTitle, String empPosition, String empLocation, String empdept) {
-		super();
-		this.empId = empId;
-		this.empName = empName;
-		this.userName = userName;
-		this.empEmail = empEmail;
-		this.empContact = empContact;
-		this.jobTitle = jobTitle;
-		this.empPosition = empPosition;
-		this.empLocation = empLocation;
-		this.empdept = empdept;
+	public Set<Employees> getSubordinates() {
+		return subordinates;
 	}
+
+	public void setSubordinates(Set<Employees> subordinates) {
+		this.subordinates = subordinates;
+	}
+
 	
-	//Constructor for test cases
+
 	
+
 
 }

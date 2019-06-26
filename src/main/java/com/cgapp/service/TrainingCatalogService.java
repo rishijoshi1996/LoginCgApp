@@ -19,7 +19,7 @@ public class TrainingCatalogService {
 		return trainingrepo.save(trainingcatalog);
 	}
 	
-	//fetch all trainingg catalog details
+	//fetch all training catalog details
 	public List<TrainingCatalog> getTraining(){
 		return trainingrepo.findAll();
 	}

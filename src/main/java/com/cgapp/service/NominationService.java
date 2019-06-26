@@ -3,6 +3,7 @@ package com.cgapp.service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,32 +13,50 @@ import com.cgapp.dto.NominationRepository;
 import com.cgapp.dto.TrainingCatalogRepository;
 import com.cgapp.entity.Employees;
 import com.cgapp.entity.Nomination;
-import com.cgapp.entity.TrainingCatalog;
 
 @Service
 public class NominationService {
-
+	
 	@Autowired
-	private NominationRepository nominationrepo;
-
+	private TrainingCatalogRepository trainingrepo;
+	
 	@Autowired
 	private EmployeeRepository emprepo;
 
 	@Autowired
-	private TrainingCatalogRepository trainingrepo;
+	private NominationRepository nominationrepo;
 
-	//create Nomination
+	// create Nomination
 	public Nomination createNomination(Nomination nomination) {
-		Employees emp = emprepo.findOne(102);
-		nomination.setEmployees(emp);
-		TrainingCatalog catalog = trainingrepo.findOne(501);
-		nomination.setTrainingcatalog(catalog);
+
+		nomination.setEmployees(emprepo.findOne(nomination.getEmployees().getEmpId()));
+		nomination.setTrainingcatalog(trainingrepo.findOne(nomination.getTrainingcatalog().getTrainingId()));	
+		nomination.setEmpTimestamp(timestamp());
 		return nominationrepo.save(nomination);
 	}
 
-	//Get all Nomination details
+	// Get all Nomination details
 	public List<Nomination> getNomination() {
 		return nominationrepo.findAll();
+	}
+	
+	public List<Nomination> getNominationByEmpId(int empId){	
+		return nominationrepo.findByEmployees(emprepo.findOne(empId));
+	}
+	
+	public List<Nomination> getNominationOfEmployees(int empId) {
+
+		Set<Employees> employeeList = emprepo.findOne(empId).getSubordinates();
+		return nominationrepo.findByEmployeesInAndStatus(employeeList, "pending");
+	}
+	
+	public String changeStatus(int nomId,String status) {
+		
+		Nomination nomination = nominationrepo.findOne(nomId);
+		nomination.setStatus(status);
+		nominationrepo.save(nomination);
+		return "Status Updated to "+status;
+		
 	}
 
 	// Timestamp Locale Date
@@ -48,4 +67,6 @@ public class NominationService {
 		return dtf.format(now);
 
 	}
+
+
 }

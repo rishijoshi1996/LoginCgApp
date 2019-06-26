@@ -2,6 +2,8 @@ package com.cgapp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,7 @@ public class Nomination {
 
 	@Id
 	@Column(name = "nomination_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int nominationId;
 
 	@Column(name = "status")
@@ -100,4 +103,12 @@ public class Nomination {
 		this.mgrTimestamp = mgrTimestamp;
 	}
 
+	@Override
+	public String toString() {
+		return "Nomination [nominationId=" + nominationId + ", status=" + status + ", deviceId=" + deviceId
+				+ ", empTimestamp=" + empTimestamp + ", mgrTimestamp=" + mgrTimestamp + ", employees=" + employees
+				+ ", trainingcatalog=" + trainingcatalog + "]";
+	}
+
+	
 }
