@@ -41,5 +41,9 @@ public class EmployeeService {
 			throw new EmployeeNotFoundException(id);
 		}
 	}
+	
+	public List<Employees> getManager(){
+		return emprepo.getEmployeesQuery();
+	}
 
 }
