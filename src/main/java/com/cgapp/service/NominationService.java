@@ -68,6 +68,18 @@ public class NominationService {
 		return dtf.format(now);
 
 	}
+	
+	public String deleteAll() {
+		 nominationrepo.deleteAll();
+		 return "Deleted all";
+	}
+	
+	public String deleteOne(int nId) {
+		
+		nominationrepo.delete(nId);
+		return "Deleted one";
+		
+	}
 
 
 }

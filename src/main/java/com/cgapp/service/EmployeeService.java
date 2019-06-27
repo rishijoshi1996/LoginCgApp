@@ -21,9 +21,11 @@ public class EmployeeService {
 	private EmployeeRepository emprepo;
 
 	// Create new Employee
-	public Employees createEmployees(Employees employee) {
-//		Employees manager = emprepo.findOne(101);
-//		employee.setManager(manager);
+	public List<Employees> createEmployees(List<Employees> employee) {
+		
+		for (Employees e : employee) {
+			e.setManager(emprepo.findOne(e.getManager().getEmpId()));
+		}
 		return emprepo.save(employee);
 
 	}
@@ -36,6 +38,18 @@ public class EmployeeService {
 	public Employees findEmp(int id) {
 		return emprepo.findOne(id);
 
+	}
+	
+	public String deleteAll() {
+		 emprepo.deleteAll();
+		 return "Deleted all";
+	}
+	
+	public String deleteOne(int empId) {
+		
+		emprepo.delete(empId);
+		return "Deleted one";
+		
 	}
 
 }

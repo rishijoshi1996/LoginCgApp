@@ -15,7 +15,7 @@ public class TrainingCatalogService {
 	private TrainingCatalogRepository trainingrepo;
 	
 	//Create Training Catalog
-	public TrainingCatalog createTrainingCatalog(TrainingCatalog trainingcatalog) {
+	public List<TrainingCatalog> createTrainingCatalog(List<TrainingCatalog> trainingcatalog) {		
 		return trainingrepo.save(trainingcatalog);
 	}
 	
@@ -23,4 +23,18 @@ public class TrainingCatalogService {
 	public List<TrainingCatalog> getTraining(){
 		return trainingrepo.findAll();
 	}
+	
+	public String deleteAll() {
+		 trainingrepo.deleteAll();
+		 return "Deleted all";
+	}
+	
+	public String deleteOne(int tId) {
+		
+		trainingrepo.delete(tId);
+		return "Deleted one";
+		
+	}
+	
+	
 }

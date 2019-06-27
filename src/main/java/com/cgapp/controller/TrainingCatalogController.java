@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +24,9 @@ public class TrainingCatalogController {
 	private TrainingCatalogService trainingservice;
 
 	@PostMapping(path = "/trainings", produces = "application/json")
-	public ResponseEntity<TrainingCatalog> createTraining(@RequestBody TrainingCatalog trainingcatalog) {
-		TrainingCatalog tc = trainingservice.createTrainingCatalog(trainingcatalog);
-		
-		return new ResponseEntity<TrainingCatalog>(tc,HttpStatus.CREATED);
+	public ResponseEntity<List<TrainingCatalog>> createTraining(@RequestBody List<TrainingCatalog> trainingcatalog) {
+		List<TrainingCatalog> tc = trainingservice.createTrainingCatalog(trainingcatalog);
+		return new ResponseEntity<List<TrainingCatalog>>(tc,HttpStatus.CREATED);
 	}
 
 	
@@ -33,5 +34,16 @@ public class TrainingCatalogController {
 	public List<TrainingCatalog> getTraining(){
 		
 		return trainingservice.getTraining();
+	}
+	
+	
+	@DeleteMapping(path = "/trainings")
+	public String deleteAll(){
+		return trainingservice.deleteAll();
+	}
+	
+	@DeleteMapping(path = "/trainings/{tid}")
+	public String deleteOne(@PathVariable("tid") int id){
+		return trainingservice.deleteOne(id);
 	}
 }
