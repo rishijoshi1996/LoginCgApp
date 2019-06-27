@@ -143,4 +143,23 @@ public class TrainingCatalog {
 		this.trainingLinks = trainingLinks;
 	}
 
+	//
+	public TrainingCatalog(int trainingId, String trainingName, String trainingAudience, String trainingDuration,
+			String trainingLocation, String trainingType, String trainingStartDate, String trainingEndDate,
+			String trainingStartTime, String trainingEndTime, String trainingLinks) {
+		super();
+		this.trainingId = trainingId;
+		this.trainingName = trainingName;
+		this.trainingAudience = trainingAudience;
+		this.trainingDuration = trainingDuration;
+		this.trainingLocation = trainingLocation;
+		this.trainingType = trainingType;
+		this.trainingStartDate = trainingStartDate;
+		this.trainingEndDate = trainingEndDate;
+		this.trainingStartTime = trainingStartTime;
+		this.trainingEndTime = trainingEndTime;
+		this.trainingLinks = trainingLinks;
+	}
+
+	
 }
