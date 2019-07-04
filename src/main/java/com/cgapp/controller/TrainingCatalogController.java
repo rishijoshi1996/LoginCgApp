@@ -23,27 +23,30 @@ public class TrainingCatalogController {
 	@Autowired
 	private TrainingCatalogService trainingservice;
 
+	@GetMapping(path = "/hello")
+	public String hello() {
+		return trainingservice.hello();
+	}
+
 	@PostMapping(path = "/trainings", produces = "application/json")
 	public ResponseEntity<List<TrainingCatalog>> createTraining(@RequestBody List<TrainingCatalog> trainingcatalog) {
 		List<TrainingCatalog> tc = trainingservice.createTrainingCatalog(trainingcatalog);
-		return new ResponseEntity<List<TrainingCatalog>>(tc,HttpStatus.CREATED);
+		return new ResponseEntity<List<TrainingCatalog>>(tc, HttpStatus.CREATED);
 	}
 
-	
 	@GetMapping(path = "/trainings", produces = "application/json")
-	public List<TrainingCatalog> getTraining(){
-		
+	public List<TrainingCatalog> getTraining() {
+
 		return trainingservice.getTraining();
 	}
-	
-	
+
 	@DeleteMapping(path = "/trainings")
-	public String deleteAll(){
+	public String deleteAll() {
 		return trainingservice.deleteAll();
 	}
-	
+
 	@DeleteMapping(path = "/trainings/{tid}")
-	public String deleteOne(@PathVariable("tid") int id){
+	public String deleteOne(@PathVariable("tid") int id) {
 		return trainingservice.deleteOne(id);
 	}
 }

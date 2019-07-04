@@ -16,4 +16,6 @@ public interface NominationRepository extends JpaRepository<Nomination, Integer>
 	
 	List<Nomination> findByEmployeesInAndStatus(Set<Employees> employees,String status);
 	
+	List<Nomination> findByEmployeesIn(Set<Employees> employees);
+	
 }

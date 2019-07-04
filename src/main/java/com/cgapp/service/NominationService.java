@@ -49,6 +49,11 @@ public class NominationService {
 		Set<Employees> employeeList = emprepo.findOne(empId).getSubordinates();
 		return nominationrepo.findByEmployeesInAndStatus(employeeList, "pending");
 	}
+	
+	public List<Nomination> getNomEmployees(int empId){
+		Set<Employees> employeesList = emprepo.findOne(empId).getSubordinates();
+		return nominationrepo.findByEmployeesIn(employeesList);
+	}
 
 	public String changeStatus(int nomId, String status) {
 

@@ -13,6 +13,6 @@ public class LoginService {
 	private EmployeeRepository emprepo;
 
 	public Employees checkLogin(Employees employee) {
-		return emprepo.findByEmpUserNameAndEmpPassword(employee.getEmpUserName(), employee.getEmpPassword());
+		return emprepo.findByEmpUserName(employee.getEmpUserName());
 	}
 }

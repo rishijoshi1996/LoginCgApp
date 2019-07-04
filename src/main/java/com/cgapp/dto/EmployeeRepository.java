@@ -8,6 +8,7 @@ import com.cgapp.entity.Employees;
 @Repository("emprepo")
 public interface EmployeeRepository extends JpaRepository<Employees, Integer> {
 	
-	Employees findByEmpUserNameAndEmpPassword(String empUserName, String empPassword);
+	Employees findByEmpUserName(String empUserName);
+	Employees findByEmpPassword(String empPassword);
 	
 }

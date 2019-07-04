@@ -24,9 +24,11 @@ public class LoginController {
 
 		Employees employee = loginservice.checkLogin(emp);
 
-		if (employee == null) {
-			throw new LoginException(emp.getEmpUserName());
-		}
-		return new ResponseEntity<Employees>(employee, HttpStatus.OK);
+		if (employee == null) 
+			throw new LoginException("Employee not found for userid : "+emp.getEmpUserName());
+		else if(!employee.getEmpPassword().equals(emp.getEmpPassword()))
+			throw new LoginException("Password is Invalid");
+		else
+			return new ResponseEntity<Employees>(employee, HttpStatus.OK);			
 	}
 }
