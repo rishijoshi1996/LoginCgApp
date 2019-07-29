@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.Resource;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,7 +14,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.ls.LSInput;
 
 import com.cgapp.entity.Employees;
 import com.cgapp.entity.Nomination;
@@ -69,7 +64,7 @@ public class NominationController {
 	public ResponseEntity<String> changeEmployeeStatus(@PathVariable("nomId") int nomId,
 			@PathVariable("status") String status) {
 		String result = nominationservice.changeStatus(nomId, status);
-		return new ResponseEntity<String>(result, HttpStatus.OK);
+		return new ResponseEntity<String>("{ \"status\" : \""+result+"\" }", HttpStatus.OK);
 	}
 
 	@GetMapping(path = "nominations/manager/{empId}/excel")
@@ -100,28 +95,25 @@ public class NominationController {
 			}
 
 			workbook.write(fileOut);
-			System.out.println("File created");
+			// System.out.println("File created");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		File file = new File("C:\\\\Users\\\\risjoshi\\\\Desktop\\\\Excel\\\\Manager.xls");
-		InputStreamResource resource=null;
+		InputStreamResource resource = null;
 		try {
 			resource = new InputStreamResource(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return new ResponseEntity<List<Nomination>>(nomination, HttpStatus.OK);
+		// return new ResponseEntity<List<Nomination>>(nomination, HttpStatus.OK);
 		Employees emp = nomination.get(0).getEmployees();
-		String fn = emp.getManager().getEmpId() +"_"+ emp.getManager().getEmpName()+".xls";
-		
-		return ResponseEntity.ok()
-				.header("Content-Disposition", "attachment; filename="+fn)
-				.contentLength(file.length())
-				.contentType(MediaType.APPLICATION_OCTET_STREAM)
-				.body(resource);
+		String fn = emp.getManager().getEmpId() + "_" + emp.getManager().getEmpName() + ".xls";
+
+		return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=" + fn)
+				.contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
 	}
 
 	@DeleteMapping(path = "/nominations")
@@ -133,4 +125,5 @@ public class NominationController {
 	public String deleteOne(@PathVariable("nid") int id) {
 		return nominationservice.deleteOne(id);
 	}
+
 }
