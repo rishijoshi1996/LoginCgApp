@@ -160,6 +160,13 @@ public class Employees {
 	public void setSubordinates(Set<Employees> subordinates) {
 		this.subordinates = subordinates;
 	}
+
+	public Employees(int empId) {
+		
+		this.empId = empId;
+	}
+
+
 	
 	
 

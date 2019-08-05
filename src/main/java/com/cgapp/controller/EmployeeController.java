@@ -25,9 +25,9 @@ public class EmployeeController {
 	private EmployeeService empservice;
 
 	@PostMapping(path = "/employees", consumes = "application/json", produces = "application/json")
-	public String creatEmployee(@RequestBody List<Employees> employee) {
-		empservice.createEmployees(employee);
-		return "Employee Added";
+	public ResponseEntity<List<Employees>> creatEmployee(@RequestBody List<Employees> employee) {
+		List<Employees> emplist = empservice.createEmployees(employee);
+		return new ResponseEntity<List<Employees>>(emplist, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path = "/employees", produces = "application/json")

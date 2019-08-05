@@ -23,12 +23,9 @@ public class TrainingCatalogController {
 	@Autowired
 	private TrainingCatalogService trainingservice;
 
-	@GetMapping(path = "/hello")
-	public String hello() {
-		return trainingservice.hello();
-	}
 
-	@PostMapping(path = "/trainings", produces = "application/json")
+
+	@PostMapping(path = "/trainings", consumes = "application/json")
 	public ResponseEntity<List<TrainingCatalog>> createTraining(@RequestBody List<TrainingCatalog> trainingcatalog) {
 		List<TrainingCatalog> tc = trainingservice.createTrainingCatalog(trainingcatalog);
 		return new ResponseEntity<List<TrainingCatalog>>(tc, HttpStatus.CREATED);

@@ -36,9 +36,7 @@ public class TrainingCatalogService {
 		
 	}
 	
-	public String hello() {
-		return "hello";
-	}
+	
 	
 	
 }
