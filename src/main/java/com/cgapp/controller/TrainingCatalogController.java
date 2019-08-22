@@ -2,6 +2,8 @@ package com.cgapp.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +25,19 @@ public class TrainingCatalogController {
 	@Autowired
 	private TrainingCatalogService trainingservice;
 
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 
 	@PostMapping(path = "/trainings", consumes = "application/json")
 	public ResponseEntity<List<TrainingCatalog>> createTraining(@RequestBody List<TrainingCatalog> trainingcatalog) {
 		List<TrainingCatalog> tc = trainingservice.createTrainingCatalog(trainingcatalog);
+		logger.info("Traininig Details Added");
 		return new ResponseEntity<List<TrainingCatalog>>(tc, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path = "/trainings", produces = "application/json")
 	public List<TrainingCatalog> getTraining() {
-
+		logger.info("Succesfull");
 		return trainingservice.getTraining();
 	}
 

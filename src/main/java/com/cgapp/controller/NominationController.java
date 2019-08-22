@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -34,29 +36,35 @@ import com.cgapp.service.NominationService;
 @RestController
 public class NominationController {
 
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
 	@Autowired
 	private NominationService nominationservice;
 
 	@PostMapping(path = "/nominations", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Nomination> createNominee(@RequestBody Nomination nomination) {
 		nominationservice.createNomination(nomination);
+		logger.info("Nomination details added");
 		return new ResponseEntity<Nomination>(nomination, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path = "/nominations", produces = "application/json")
 	public List<Nomination> getNomination() {
+		logger.info("Succesfull");
 		return nominationservice.getNomination();
 	}
 
 	@GetMapping(path = "/nominations/{empId}", produces = "application/json")
 	public ResponseEntity<List<Nomination>> getNominationByEmpId(@PathVariable("empId") int empId) {
 		List<Nomination> noms = nominationservice.getNominationByEmpId(empId);
+		logger.info("Succesfull");
 		return new ResponseEntity<List<Nomination>>(noms, HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/nominations/manager/{empId}", produces = "application/json")
 	public ResponseEntity<List<Nomination>> getNominationOfEmployees(@PathVariable("empId") int empId) {
 		List<Nomination> noms = nominationservice.getNominationOfEmployees(empId);
+		logger.info("Succesfull");
 		return new ResponseEntity<List<Nomination>>(noms, HttpStatus.OK);
 	}
 
@@ -64,7 +72,7 @@ public class NominationController {
 	public ResponseEntity<String> changeEmployeeStatus(@PathVariable("nomId") int nomId,
 			@PathVariable("status") String status) {
 		String result = nominationservice.changeStatus(nomId, status);
-		return new ResponseEntity<String>("{ \"status\" : \""+result+"\" }", HttpStatus.OK);
+		return new ResponseEntity<String>("{ \"status\" : \"" + result + "\" }", HttpStatus.OK);
 	}
 
 	@GetMapping(path = "nominations/manager/{empId}/excel")
@@ -111,6 +119,7 @@ public class NominationController {
 		// return new ResponseEntity<List<Nomination>>(nomination, HttpStatus.OK);
 		Employees emp = nomination.get(0).getEmployees();
 		String fn = emp.getManager().getEmpId() + "_" + emp.getManager().getEmpName() + ".xls";
+		logger.info("Excel File Downloaded");
 
 		return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=" + fn)
 				.contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);

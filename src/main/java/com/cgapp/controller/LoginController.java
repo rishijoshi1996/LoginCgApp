@@ -1,5 +1,7 @@
 package com.cgapp.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,12 @@ import com.cgapp.service.LoginService;
 @RestController
 public class LoginController {
 
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
 	@Autowired
 	private LoginService loginservice;
 
-	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Employees> checkLogin(@RequestBody Employees emp) {
 
 		Employees employee = loginservice.checkLogin(emp);
@@ -29,6 +33,7 @@ public class LoginController {
 		else if(!employee.getEmpPassword().equals(emp.getEmpPassword()))
 			throw new LoginException("Password is Invalid");
 		else
+			logger.info("Succesfully Logged in");
 			return new ResponseEntity<Employees>(employee, HttpStatus.OK);			
 	}
 }
