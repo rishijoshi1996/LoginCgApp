@@ -5,12 +5,16 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.cgapp.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -20,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table
-public class Employees {
+@EntityListeners(AuditingEntityListener.class)
+public class Employees extends Auditable<String> {
 
 	@Id
 	@Column(name = "employee_id")

@@ -2,6 +2,7 @@ package com.cgapp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,13 +10,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.cgapp.audit.Auditable;
+
 /**
  * @author risjoshi
  *
  */
 @Entity
 @Table(name = "nomination")
-public class Nomination {
+@EntityListeners(AuditingEntityListener.class)
+public class Nomination extends Auditable<String> {
 
 	@Id
 	@Column(name = "nomination_id")
