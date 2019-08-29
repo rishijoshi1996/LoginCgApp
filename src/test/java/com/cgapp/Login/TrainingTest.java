@@ -20,7 +20,7 @@ public class TrainingTest extends AbstractTest {
 
 	@Test
 	public void getTrainingList() throws Exception {
-		String uri = "/trainings";
+		String uri = "/api/trainings";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 

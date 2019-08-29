@@ -21,7 +21,7 @@ public class NominationTest extends AbstractTest {
 
 	@Test
 	public void getTrainingList() throws Exception {
-		String uri = "/nominations";
+		String uri = "/api/nominations";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 

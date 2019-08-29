@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cgapp.entity.TrainingCatalog;
 import com.cgapp.service.TrainingCatalogService;
@@ -30,7 +28,6 @@ public class TrainingCatalogController {
 	private TrainingCatalogService trainingservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-
 
 	@PostMapping(path = "/trainings", consumes = "application/json")
 	public ResponseEntity<List<TrainingCatalog>> createTraining(@RequestBody List<TrainingCatalog> trainingcatalog) {
@@ -54,5 +51,5 @@ public class TrainingCatalogController {
 	public String deleteOne(@PathVariable("tid") int id) {
 		return trainingservice.deleteOne(id);
 	}
-	
+
 }
