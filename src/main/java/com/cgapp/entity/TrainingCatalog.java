@@ -2,10 +2,15 @@ package com.cgapp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.cgapp.audit.Auditable;
 
 /**
  * 
@@ -14,7 +19,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "training_catalog")
-public class TrainingCatalog {
+@EntityListeners(AuditingEntityListener.class)
+public class TrainingCatalog extends Auditable<String> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

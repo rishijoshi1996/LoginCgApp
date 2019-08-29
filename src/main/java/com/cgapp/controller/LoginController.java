@@ -23,7 +23,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginservice;
 
-	@PostMapping(path = "/", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/loginapp", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Employees> checkLogin(@RequestBody Employees emp) {
 
 		Employees employee = loginservice.checkLogin(emp);
