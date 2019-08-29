@@ -55,9 +55,4 @@ public class TrainingCatalogController {
 		return trainingservice.deleteOne(id);
 	}
 	
-	@PostMapping("/upload")
-	public String uploadData(@RequestParam("file") MultipartFile file ) {
-		return "Success";
-		
-	}
 }

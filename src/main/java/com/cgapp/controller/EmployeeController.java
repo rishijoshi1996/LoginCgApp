@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cgapp.entity.Employees;
 import com.cgapp.exception.EmployeeNotFoundException;
@@ -33,14 +35,12 @@ public class EmployeeController {
 	@PostMapping(path = "/employees", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<List<Employees>> creatEmployee(@RequestBody List<Employees> employee) {
 		List<Employees> emplist = empservice.createEmployees(employee);
-
 		return new ResponseEntity<List<Employees>>(emplist, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path = "/employees", produces = "application/json")
 	public List<Employees> getEmployee() {
-		logger.info("Successfull");
-
+		logger.info("/employees by : "+LoginController.loggedUser.getEmpEmail());
 		return empservice.getEmployees();
 	}
 
@@ -65,4 +65,17 @@ public class EmployeeController {
 		return empservice.deleteOne(id);
 	}
 
+	@PostMapping(path = "/upload")
+	public List<Employees> upload(@RequestParam("file") MultipartFile file) {
+		try {
+			empservice.deleteExcelData();
+			empservice.init();
+			empservice.store(file);
+			return empservice.readExcelData(file.getOriginalFilename());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

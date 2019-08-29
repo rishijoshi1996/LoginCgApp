@@ -19,21 +19,24 @@ import com.cgapp.service.LoginService;
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	public static Employees loggedUser = new Employees();
 
 	@Autowired
 	private LoginService loginservice;
 
-	@PostMapping(path = "/loginapp", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/api/loginapp", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Employees> checkLogin(@RequestBody Employees emp) {
 
 		Employees employee = loginservice.checkLogin(emp);
 
-		if (employee == null) 
-			throw new LoginException("Employee not found for userid : "+emp.getEmpUserName());
-		else if(!employee.getEmpPassword().equals(emp.getEmpPassword()))
+		if (employee == null)
+			throw new LoginException("Employee not found for userid : " + emp.getEmpUserName());
+		else if (!employee.getEmpPassword().equals(emp.getEmpPassword()))
 			throw new LoginException("Password is Invalid");
-		else
-			logger.info("Succesfully Logged in");
-			return new ResponseEntity<Employees>(employee, HttpStatus.OK);			
+		else {
+			logger.info("loggedUserEmail - "+employee.getEmpEmail());
+			loggedUser = employee;
+			return new ResponseEntity<Employees>(employee, HttpStatus.OK);
+		}
 	}
 }
